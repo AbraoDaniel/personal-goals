@@ -6,9 +6,6 @@
   <br>
 </h1>
 
-
-
-
 <h4 align="center">A full stack application to manage personal goals</h4>
 
 <p align="center">
@@ -18,6 +15,8 @@
   <a href="#contact">Contact</a>
 </p>
 
+
+## Demonstration
 <div align="center">
   
   https://github.com/user-attachments/assets/9fe5a3c2-ffb8-40cf-aa69-598336b671dd
@@ -25,11 +24,11 @@
 </div>
 
 
-# About the project
+## About the project
 The <strong>"Danti Personal Goals"</strong> project was developed with the purpose of facilitating weekly goal management, allowing users to create tasks, track their completion progress, and efficiently manage pending items. The platform provides a clear overview of weekly performance, helping to maintain focus and productivity
  
 
-# How to use
+## How to use
 
 To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) and [docker](https://www.docker.com/products/docker-desktop/) installed on your computer. From your command line:
 
@@ -63,7 +62,7 @@ $ npm install
 $ npm run dev
 ```
 
-# Contact
+## Contact
 
 <div> 
   <a href = "mailto:abraodaniel@hotmail.com"><img src="https://img.shields.io/badge/-Outlook-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
