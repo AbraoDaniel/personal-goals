@@ -5,7 +5,7 @@ import { and, count, gte, lte, eq, sql } from 'drizzle-orm'
 
 export async function getWeekGoals() {
   const firstDayOfWeek = dayjs().startOf('week').toDate()
-  const lastDayOfWek = dayjs().endOf('week').toDate()
+  const lastDayOfWeek = dayjs().endOf('week').toDate()
 
   const goalsCreatedUpToWeek = db.$with('goals_created_up_to_week').as(
     db
@@ -16,7 +16,7 @@ export async function getWeekGoals() {
         createdAt: goals.createdAt,
       })
       .from(goals)
-      .where(lte(goals.createdAt, lastDayOfWek))
+      .where(lte(goals.createdAt, lastDayOfWeek))
   )
 
   const goalCompletionCount = db.$with('goal_completion_count').as(
@@ -29,7 +29,7 @@ export async function getWeekGoals() {
       .where(
         and(
           gte(goalCompletions.createdAt, firstDayOfWeek),
-          lte(goalCompletions.createdAt, lastDayOfWek)
+          lte(goalCompletions.createdAt, lastDayOfWeek)
         )
       )
       .groupBy(goalCompletions.goalId)
