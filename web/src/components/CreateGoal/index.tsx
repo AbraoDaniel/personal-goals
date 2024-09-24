@@ -51,14 +51,13 @@ const CreateGoal: React.FC = () => {
       <div className="flex flex-col gap-6 h-full">
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
-            <DialogTitle>Cadastrar meta</DialogTitle>
+            <DialogTitle>Create Goal</DialogTitle>
             <DialogClose>
               <X className="size-5 text-zinc-600" />
             </DialogClose>
           </div>
           <DialogDescription>
-            Adicione atividades que te fazem bem e que você quer continuar
-            praticando toda semana.
+            Add activities you want to practice during the week.
           </DialogDescription>
         </div>
         <form
@@ -67,11 +66,11 @@ const CreateGoal: React.FC = () => {
         >
           <div className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
-              <Label htmlFor="title">Qual a atividade?</Label>
+              <Label htmlFor="title">What is the activity?</Label>
               <Input
                 id="title"
                 autoFocus
-                placeholder="Acordar cedo, ir para a academia, etc..."
+                placeholder="Waking up early, go to the gym, etc."
                 {...register('title')}
               />
 
@@ -82,7 +81,7 @@ const CreateGoal: React.FC = () => {
               )}
             </div>
             <div className="flex flex-col gap-2">
-              <Label htmlFor="title">Quantas vezes na semana?</Label>
+              <Label htmlFor="title">How many times per week?</Label>
               <Controller
                 defaultValue={1}
                 control={control}
@@ -111,10 +110,10 @@ const CreateGoal: React.FC = () => {
           <div className="flex items-center gap-3 mt-2">
             <DialogClose asChild>
               <Button type="button" className="flex-1" variant="secondary">
-                Fechar
+                Close
               </Button>
             </DialogClose>
-            <Button className="flex-1">Salvar</Button>
+            <Button className="flex-1">Create</Button>
           </div>
         </form>
       </div>

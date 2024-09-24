@@ -13,7 +13,7 @@ const GoalFrequencyRadioItem: React.FC<IGoalFrequency> = ({
     <RadioGroupItem value={frequency}>
       <RadioGroupIndicator />
       <span className="text-zinc-300 text-sm font-medium leading-none">
-        {frequency}x na semana
+        {frequency}x per week
       </span>
       <span className="text-lg leading-none">{emoji}</span>
     </RadioGroupItem>

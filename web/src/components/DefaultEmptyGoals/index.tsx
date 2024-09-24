@@ -13,13 +13,13 @@ const DefaultEmptyGoals: React.FC = () => {
       </div>
       <img src={defaultIllustration} alt="default-illustration" />
       <p className="text-zinc-300 leading-relaxed max-w-80 text-center">
-        Você ainda não cadastrou metas, que tal cadastrar uma agora mesmo?
+        You haven't set any goals yet, how about setting one right now?
       </p>
 
       <DialogTrigger asChild>
         <Button>
           <Plus className="size-4" />
-          Cadastrar Meta
+          Create goal
         </Button>
       </DialogTrigger>
     </div>
