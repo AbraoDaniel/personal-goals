@@ -91,8 +91,8 @@ const CreateGoal: React.FC = () => {
                       {frequencyFields?.map(field => {
                         return (
                           <GoalFrequencyRadioItem
-                            key={field.frequency}
-                            frequency={field.frequency}
+                            key={field.value}
+                            value={field.value}
                             emoji={field.emoji}
                           />
                         )

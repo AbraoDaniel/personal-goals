@@ -6,6 +6,6 @@ export type CreateGoalFields = {
 }
 
 export interface IGoalFrequency {
-  frequency: string
+  value: string
   emoji: ReactNode
 }
