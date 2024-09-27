@@ -1,15 +1,17 @@
 import { CheckCircle2, Plus, CircleSlash } from 'lucide-react'
 import { Button } from '../ui/button'
 import { DialogTrigger } from '../ui/dialog'
-import { PrincipalIcon } from '../PrincipalIcon'
 import { Progress, ProgressIndicator } from '../ui/progress-bar'
 import { Separator } from '../ui/separator'
 import { getSummary } from '../../services/get-summary'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import GoalsList from '../GoalsList'
+import { deleteGoalCompletion } from '../../services/delete-goal-completion'
 
 const SummaryGoals: React.FC = () => {
+  const queryClient = useQueryClient()
+
   const { data } = useQuery({
     queryKey: ['summary_query'],
     queryFn: getSummary,
@@ -25,6 +27,12 @@ const SummaryGoals: React.FC = () => {
 
   const completedPercentage = Math.round((data?.completed * 100) / data?.total)
   const hasData = Object?.keys(data?.goalsPerDay)?.length > 0
+
+  async function handleUndoGoalCompletion(goalCompletionId: string) {
+    await deleteGoalCompletion(goalCompletionId)
+    queryClient.invalidateQueries({ queryKey: ['summary_query'] })
+    queryClient.invalidateQueries({ queryKey: ['goals_list'] })
+  }
 
   return (
     <div className="py-10 max-w-[480px] px-5 mx-auto flex flex-col gap-6">
@@ -52,7 +60,7 @@ const SummaryGoals: React.FC = () => {
         <Progress value={8} max={15}>
           <ProgressIndicator style={{ width: `${completedPercentage}%` }} />
         </Progress>
-        <div className="flex items-center justify-between text-xs text-zinc-400">
+        <div className="flex items-center justify-between text-xs text-zinc-400 mt-1">
           <span>
             You have completed{' '}
             <span className="text-zinc-100">{data?.completed}</span> of{' '}
@@ -88,7 +96,7 @@ const SummaryGoals: React.FC = () => {
 
                     return (
                       <li key={goal.id} className="flex items-center gap-2">
-                        <CheckCircle2 className="size-4 text-pink-500" />
+                        <CheckCircle2 className="size-4 text-violet-600" />
                         <span className="text-sm text-zinc-400">
                           You have completed "
                           <span className="text-zinc-100">{goal.title}</span>"
@@ -96,11 +104,10 @@ const SummaryGoals: React.FC = () => {
                           <span className="text-zinc-100">
                             {formattedHour}h
                           </span>
-                          <span className="ml-3 text-xs hover:text-pink-500">
+                          <span className="ml-3 text-xs hover:text-violet-600">
                             <button
                               type="button"
-                              onClick={() => alert('desfazer')}
-                              hidden
+                              onClick={() => handleUndoGoalCompletion(goal.id)}
                             >
                               {' '}
                               Undo

@@ -1,8 +1,9 @@
-import { Plus } from 'lucide-react'
+import { Plus, Trash } from 'lucide-react'
 import { OutlineButton } from '../ui/outline-button'
 import { getGoalsList } from '../../services/get-goals-list'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { createGoalCompletion } from '../../services/create-goal-completion'
+import { deleteGoal } from '../../services/delete-goal'
 
 const GoalsList: React.FC = () => {
   const queryClient = useQueryClient()
@@ -22,18 +23,37 @@ const GoalsList: React.FC = () => {
     queryClient.invalidateQueries({ queryKey: ['goals_list'] })
   }
 
+  async function handleDeleteGoal(goalId: string) {
+    await deleteGoal(goalId)
+    queryClient.invalidateQueries({ queryKey: ['summary_query'] })
+    queryClient.invalidateQueries({ queryKey: ['goals_list'] })
+  }
+
   return (
     <div className="flex flex-wrap gap-3">
       {data?.map(goal => {
         return (
-          <OutlineButton
-            key={goal?.id}
-            disabled={goal?.completionCount >= goal?.desiredWeeklyFrequency}
-            onClick={() => handleCompleteGoal(goal?.id)}
+          <div
+            key={goal.id}
+            className={
+              goal?.completionCount >= goal?.desiredWeeklyFrequency
+                ? 'cursor-not-allowed flex items-center pr-4 rounded-full border border-dashed border-zinc-800'
+                : 'flex items-center pr-4 rounded-full border border-dashed border-zinc-800 hover:border-violet-600'
+            }
           >
-            <Plus className="size-4 text-zinc-600" />
-            {goal?.title}
-          </OutlineButton>
+            <OutlineButton
+              key={goal?.id}
+              disabled={goal?.completionCount >= goal?.desiredWeeklyFrequency}
+              onClick={() => handleCompleteGoal(goal?.id)}
+            >
+              <Plus className="size-4 text-zinc-400 mb-0.5" />
+              {goal?.title}
+            </OutlineButton>
+            <Trash
+              onClick={() => handleDeleteGoal(goal?.id)}
+              className="cursor-pointer size-4 mb-1 text-zinc-400 hover:text-violet-600"
+            />
+          </div>
         )
       })}
     </div>

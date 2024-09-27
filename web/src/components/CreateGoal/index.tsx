@@ -6,11 +6,7 @@ import {
 } from '../ui/dialog'
 import { Label } from '../ui/label'
 import { Input } from '../ui/input'
-import {
-  RadioGroup,
-  RadioGroupIndicator,
-  RadioGroupItem,
-} from '../ui/radio-group'
+import { RadioGroup } from '../ui/radio-group'
 import { Button } from '../ui/button'
 import { X } from 'lucide-react'
 import { Controller, useForm } from 'react-hook-form'
@@ -95,8 +91,8 @@ const CreateGoal: React.FC = () => {
                       {frequencyFields?.map(field => {
                         return (
                           <GoalFrequencyRadioItem
-                            key={field.value}
-                            frequency={field.value}
+                            key={field.frequency}
+                            frequency={field.frequency}
                             emoji={field.emoji}
                           />
                         )

@@ -8,6 +8,8 @@ import { createGoalRoute } from './routes/create-goal'
 import { createGoalCompletionRoute } from './routes/create-completion'
 import { getPendingGoalsRoute } from './routes/get-pending-goals'
 import { getWeekSummaryRoute } from './routes/get-week-summary'
+import { deleteGoalCompletionRoute } from './routes/delete-goal-completion'
+import { deleteGoalRoute } from './routes/delete-goal'
 import fastifyCors from '@fastify/cors'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
@@ -19,10 +21,17 @@ app.register(fastifyCors, {
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(createGoalRoute) // registra uma nova rota
+// ROTAS DE CRIAÇÃO
+app.register(createGoalRoute)
 app.register(createGoalCompletionRoute)
+
+// ROTAS DE CONSULTA
 app.register(getPendingGoalsRoute)
 app.register(getWeekSummaryRoute)
+
+// ROTAS DE REMOÇÃO
+app.register(deleteGoalCompletionRoute)
+app.register(deleteGoalRoute)
 
 app
   .listen({
